@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Я хочу — Ароматний Світ Єліни</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #faf8f5;
+  color: #2c2c2c;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(27, 58, 75, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+.nav a.active { background: rgba(255,255,255,0.2); color: white; }
+.nav .brand { font-family: 'Playfair Display', serif; font-size: 1.1em; margin-right: 12px; color: white; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 40px 30px; }
+
+.page-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8em;
+  color: #1B3A4B;
+  margin-bottom: 10px;
+}
+
+.page-header .count {
+  font-size: 1.1em;
+  color: #8BA5B0;
+  font-style: italic;
+}
+
+.page-header .description {
+  max-width: 700px;
+  margin: 15px auto 0;
+  color: #666;
+  font-size: 1.05em;
+}
+
+/* Grid layout for perfume cards */
+.perfume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.perfume-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+  border-left: 4px solid #4A7C8E;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  gap: 15px;
+}
+
+.perfume-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+
+.perfume-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f8f8f8;
+  flex-shrink: 0;
+}
+
+.perfume-info { flex: 1; min-width: 0; }
+
+.perfume-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15em;
+  color: #1B3A4B;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.perfume-brand {
+  color: #4A7C8E;
+  font-weight: 600;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.perfume-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.85em;
+  color: #888;
+}
+
+.perfume-meta span { display: flex; align-items: center; gap: 4px; }
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.78em;
+  font-weight: 600;
+}
+
+.tag.female { background: #fce4ec; color: #c2185b; }
+.tag.male { background: #e3f2fd; color: #1565c0; }
+.tag.unisex { background: #f3e5f5; color: #7b1fa2; }
+
+.perfume-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #4A7C8E;
+  text-decoration: none;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.perfume-link:hover { color: #1B3A4B; text-decoration: underline; }
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
+
+.stat-item {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  color: #1B3A4B;
+}
+
+.stat-label {
+  font-size: 0.82em;
+  color: #8BA5B0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Filter/sort controls */
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus { border-color: #4A7C8E; }
+
+.sort-btn {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.88em;
+  font-weight: 600;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.sort-btn:hover, .sort-btn.active { border-color: #4A7C8E; color: #4A7C8E; background: #f0f6f8; }
+
+/* Index page specific */
+.cover {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1B3A4B 0%, #4A7C8E 50%, #8BA5B0 100%);
+  color: white;
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2em;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.cover .subtitle {
+  font-size: 1.2em;
+  font-weight: 300;
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.shelf-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.shelf-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.shelf-card:hover { transform: translateY(-5px); box-shadow: 0 8px 35px rgba(0,0,0,0.12); }
+
+.shelf-card .icon { font-size: 2.5em; margin-bottom: 15px; }
+.shelf-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4em;
+  color: #1B3A4B;
+  margin-bottom: 8px;
+}
+
+.shelf-card .shelf-count {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.shelf-card .shelf-desc {
+  font-size: 0.9em;
+  color: #888;
+  line-height: 1.5;
+}
+
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+  font-size: 0.85em;
+  border-top: 1px solid #eee;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .cover h1 { font-size: 2em; }
+  .page-header h1 { font-size: 2em; }
+  .perfume-grid { grid-template-columns: 1fr; }
+  .nav-inner { gap: 4px; }
+  .nav a { padding: 4px 10px; font-size: 0.82em; }
+}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+<a href="index.html" class="brand">Ароматний Світ Єліни</a>
+<a href="index.html">🏠 Головна</a>
+<a href="have.html">💎 В мене є (64)</a>
+<a href="want.html" class="active">✨ Я хочу (23)</a>
+<a href="had.html">🕰️ В мене були (19)</a>
+<a href="try.html">🔮 спробувати (532)</a>
+</div></nav>
+
+
+<div class="page-header">
+  <h1>✨ Я хочу</h1>
+  <div class="count"><span id="visibleCount">23</span> ароматів</div>
+  <div class="description">Список бажань — аромати, які привернули увагу та чекають на можливість стати частиною колекції.</div>
+</div>
+
+<div class="container">
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value">23</div>
+      <div class="stat-label">Ароматів</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">19</div>
+      <div class="stat-label">Брендів</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">2002–2024</div>
+      <div class="stat-label">Роки</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">0</div>
+      <div class="stat-label">Жіночих</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">23</div>
+      <div class="stat-label">Унісекс</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">0</div>
+      <div class="stat-label">Чоловічих</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Пошук за назвою або брендом...">
+    <button class="sort-btn active" data-sort="default">За замовч.</button>
+    <button class="sort-btn" data-sort="name">За назвою</button>
+    <button class="sort-btn" data-sort="brand">За брендом</button>
+    <button class="sort-btn" data-sort="year">За роком</button>
+  </div>
+
+  <div class="perfume-grid">
+    <div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.1109.jpg" alt="Dia Woman" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Dia Woman</div>
+    <div class="perfume-brand">Amouage</div>
+    <div class="perfume-meta">
+      <span>📅 2002</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/1109" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.45291.jpg" alt="Figment Woman" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Figment Woman</div>
+    <div class="perfume-brand">Amouage</div>
+    <div class="perfume-meta">
+      <span>📅 2017</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/45291" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.22961.jpg" alt="Perfume Calligraphy Saffron" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Perfume Calligraphy Saffron</div>
+    <div class="perfume-brand">Aramis</div>
+    <div class="perfume-meta">
+      <span>📅 2014</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/22961" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.40732.jpg" alt="Fathom V" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Fathom V</div>
+    <div class="perfume-brand">BeauFort London</div>
+    <div class="perfume-meta">
+      <span>📅 2016</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/40732" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.38265.jpg" alt="Parco Palladiano III: Pera" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Parco Palladiano III: Pera</div>
+    <div class="perfume-brand">Bottega Veneta</div>
+    <div class="perfume-meta">
+      <span>📅 2016</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/38265" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.38266.jpg" alt="Parco Palladiano IV: Azalea" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Parco Palladiano IV: Azalea</div>
+    <div class="perfume-brand">Bottega Veneta</div>
+    <div class="perfume-meta">
+      <span>📅 2016</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/38266" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.96538.jpg" alt="Vanille Camouflage" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Vanille Camouflage</div>
+    <div class="perfume-brand">Dries Van Noten</div>
+    <div class="perfume-meta">
+      <span>📅 2024</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/96538" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.46162.jpg" alt="I See the Clouds Go By" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">I See the Clouds Go By</div>
+    <div class="perfume-brand">Floraïku</div>
+    <div class="perfume-meta">
+      <span>📅 2017</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/46162" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.48060.jpg" alt="Armani Privé Bleu Turquoise" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Armani Privé Bleu Turquoise</div>
+    <div class="perfume-brand">Giorgio Armani</div>
+    <div class="perfume-meta">
+      <span>📅 2018</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/48060" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.34470.jpg" alt="Every Storm a Serenade" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Every Storm a Serenade</div>
+    <div class="perfume-brand">Imaginary Authors</div>
+    <div class="perfume-meta">
+      <span>📅 2015</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/34470" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.73105.jpg" alt="Vétiver Écarlate" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Vétiver Écarlate</div>
+    <div class="perfume-brand">L'Artisan Parfumeur</div>
+    <div class="perfume-meta">
+      <span>📅 2022</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/73105" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.6330.jpg" alt="Neroli 36" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Neroli 36</div>
+    <div class="perfume-brand">Le Labo</div>
+    <div class="perfume-meta">
+      <span>📅 2006</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/6330" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.3678.jpg" alt="Rose 31" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Rose 31</div>
+    <div class="perfume-brand">Le Labo</div>
+    <div class="perfume-meta">
+      <span>📅 2006</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/3678" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.78748.jpg" alt="L'Eau Rêvée D'Alma" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">L'Eau Rêvée D'Alma</div>
+    <div class="perfume-brand">Sisley</div>
+    <div class="perfume-meta">
+      <span>📅 2023</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/78748" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.91034.jpg" alt="Guilty Crush" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Guilty Crush</div>
+    <div class="perfume-brand">The House of Oud</div>
+    <div class="perfume-meta">
+      <span>📅 2024</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/91034" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.34893.jpg" alt="Soleil Blanc" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Soleil Blanc</div>
+    <div class="perfume-brand">Tom Ford</div>
+    <div class="perfume-meta">
+      <span>📅 2016</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/34893" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.83989.jpg" alt="Thé Amara" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Thé Amara</div>
+    <div class="perfume-brand">Van Cleef & Arpels</div>
+    <div class="perfume-meta">
+      <span>📅 2023</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/83989" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.78281.jpg" alt="The Sixth" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">The Sixth</div>
+    <div class="perfume-brand">Vyrao</div>
+    <div class="perfume-meta">
+      <span>📅 2022</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/78281" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.43954.jpg" alt="Nuit de Bakélite" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Nuit de Bakélite</div>
+    <div class="perfume-brand">Naomi Goodsir</div>
+    <div class="perfume-meta">
+      <span>📅 2017</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/43954" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.6619.jpg" alt="Fille en Aiguilles" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Fille en Aiguilles</div>
+    <div class="perfume-brand">Serge Lutens</div>
+    <div class="perfume-meta">
+      <span>📅 2009</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/6619" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.18393.jpg" alt="Irish Leather" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Irish Leather</div>
+    <div class="perfume-brand">Memo Paris</div>
+    <div class="perfume-meta">
+      <span>📅 2013</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/18393" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.62287.jpg" alt="Musk Superfluide" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Musk Superfluide</div>
+    <div class="perfume-brand">Les EAUX Primordiales</div>
+    <div class="perfume-meta">
+      <span>📅 2020</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/62287" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#E67E22">
+  <img src="https://fimgs.net/mdimg/perfume/s.50889.jpg" alt="Love Tuberose" loading="lazy" onerror="this.style.display='none'">
+  <div class="perfume-info">
+    <div class="perfume-name">Love Tuberose</div>
+    <div class="perfume-brand">Amouage</div>
+    <div class="perfume-meta">
+      <span>📅 2018</span>
+      <span class="tag unisex">Унісекс</span>
+    </div>
+    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/50889" target="_blank">Переглянути на Fragrantica →</a>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Ароматний Світ Єліни — Детальний Аналіз Парфумерної Колекції<br>
+  Дані з <a href="https://www.fragrantica.ua/members/19059" style="color:#4A7C8E">Fragrantica.ua</a> · Створено 2026
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.perfume-card');
+  const grid = document.querySelector('.perfume-grid');
+  const countEl = document.getElementById('visibleCount');
+
+  searchInput.addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const name = card.querySelector('.perfume-name').textContent.toLowerCase();
+      const brand = card.querySelector('.perfume-brand').textContent.toLowerCase();
+      const show = name.includes(q) || brand.includes(q);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    countEl.textContent = visible;
+  });
+
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const sortBy = this.dataset.sort;
+      const cardsArr = Array.from(cards);
+      cardsArr.sort((a, b) => {
+        if (sortBy === 'name') {
+          return a.querySelector('.perfume-name').textContent.localeCompare(b.querySelector('.perfume-name').textContent, 'uk');
+        } else if (sortBy === 'brand') {
+          return a.querySelector('.perfume-brand').textContent.localeCompare(b.querySelector('.perfume-brand').textContent, 'uk');
+        } else if (sortBy === 'year') {
+          const yA = parseInt(a.querySelector('.perfume-meta')?.textContent?.match(/\d{4}/)?.[0] || '0');
+          const yB = parseInt(b.querySelector('.perfume-meta')?.textContent?.match(/\d{4}/)?.[0] || '0');
+          return yB - yA;
+        }
+        return 0;
+      });
+      cardsArr.forEach(c => grid.appendChild(c));
+    });
+  });
+});
+</script>
+
+</body>
+</html>
