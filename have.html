@@ -18,300 +18,183 @@ body {
 }
 
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: sticky; top: 0; z-index: 100;
   background: rgba(27, 58, 75, 0.95);
   backdrop-filter: blur(10px);
   padding: 12px 0;
   box-shadow: 0 2px 20px rgba(0,0,0,0.15);
 }
-
 .nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 20px;
-  flex-wrap: wrap;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 20px; flex-wrap: wrap;
 }
-
 .nav a {
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.88em;
-  font-weight: 600;
-  transition: all 0.2s;
-  white-space: nowrap;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 0.88em; font-weight: 600;
+  transition: all 0.2s; white-space: nowrap;
 }
-
 .nav a:hover { background: rgba(255,255,255,0.15); color: white; }
 .nav a.active { background: rgba(255,255,255,0.2); color: white; }
 .nav .brand { font-family: 'Playfair Display', serif; font-size: 1.1em; margin-right: 12px; color: white; }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 40px 30px; }
 
-.page-header {
-  text-align: center;
-  padding: 60px 20px 40px;
-}
+.page-header { text-align: center; padding: 60px 20px 40px; }
+.page-header h1 { font-family: 'Playfair Display', serif; font-size: 2.8em; color: #1B3A4B; margin-bottom: 10px; }
+.page-header .count { font-size: 1.1em; color: #8BA5B0; font-style: italic; }
+.page-header .description { max-width: 700px; margin: 15px auto 0; color: #666; font-size: 1.05em; }
 
-.page-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8em;
-  color: #1B3A4B;
-  margin-bottom: 10px;
-}
+.stats-bar { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin: 20px 0 30px; }
+.stat-item { background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; }
+.stat-value { font-family: 'Playfair Display', serif; font-size: 1.8em; color: #1B3A4B; }
+.stat-label { font-size: 0.82em; color: #8BA5B0; text-transform: uppercase; letter-spacing: 1px; }
 
-.page-header .count {
-  font-size: 1.1em;
-  color: #8BA5B0;
-  font-style: italic;
+.controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 15px;
+  border: 2px solid #e0e0e0; border-radius: 8px;
+  font-size: 0.95em; font-family: inherit; outline: none;
+  transition: border-color 0.2s;
 }
-
-.page-header .description {
-  max-width: 700px;
-  margin: 15px auto 0;
-  color: #666;
-  font-size: 1.05em;
+.search-input:focus { border-color: #4A7C8E; }
+.sort-btn {
+  padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 8px;
+  background: white; cursor: pointer; font-family: inherit;
+  font-size: 0.88em; font-weight: 600; color: #555; transition: all 0.2s;
 }
+.sort-btn:hover, .sort-btn.active { border-color: #4A7C8E; color: #4A7C8E; background: #f0f6f8; }
 
-/* Grid layout for perfume cards */
-.perfume-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
-}
-
+/* Expandable perfume cards */
 .perfume-card {
   background: white;
   border-radius: 12px;
-  padding: 20px;
+  margin-bottom: 15px;
   box-shadow: 0 2px 15px rgba(0,0,0,0.06);
   border-left: 4px solid #4A7C8E;
   transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  gap: 15px;
+  overflow: hidden;
 }
+.perfume-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 
-.perfume-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-
-.perfume-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 8px;
-  background: #f8f8f8;
-  flex-shrink: 0;
+.card-header {
+  padding: 18px 20px;
+  display: flex; gap: 15px; align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
 }
+.card-header:hover { background: #f8fafb; }
 
-.perfume-info { flex: 1; min-width: 0; }
+.card-header img {
+  width: 70px; height: 70px;
+  object-fit: contain; border-radius: 8px;
+  background: #f8f8f8; flex-shrink: 0;
+}
+.card-header-info { flex: 1; min-width: 0; }
 
 .perfume-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15em;
-  color: #1B3A4B;
-  margin-bottom: 3px;
-  line-height: 1.3;
+  font-size: 1.2em; color: #1B3A4B;
+  margin-bottom: 3px; line-height: 1.3;
 }
-
 .perfume-brand {
-  color: #4A7C8E;
-  font-weight: 600;
-  font-size: 0.85em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+  color: #4A7C8E; font-weight: 600; font-size: 0.85em;
+  text-transform: uppercase; letter-spacing: 1px;
 }
-
 .perfume-meta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  font-size: 0.85em;
-  color: #888;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 0.85em; color: #888; margin-top: 4px;
 }
 
-.perfume-meta span { display: flex; align-items: center; gap: 4px; }
+.expand-icon {
+  font-size: 1.2em; color: #bbb;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.perfume-card.open .expand-icon { transform: rotate(180deg); }
 
-.tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.78em;
-  font-weight: 600;
+.card-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  border-top: 0 solid #eee;
+}
+.perfume-card.open .card-detail {
+  max-height: 2000px;
+  border-top: 1px solid #eee;
 }
 
+.card-detail-inner { padding: 20px 25px; }
+
+.detail-row { margin-bottom: 6px; font-size: 0.93em; }
+.detail-label { color: #4A7C8E; font-weight: 600; }
+.detail-section { margin: 12px 0; }
+.detail-subtitle {
+  font-weight: 600; color: #1B3A4B;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-size: 0.85em; margin-bottom: 5px;
+}
+.detail-story { color: #444; font-style: italic; line-height: 1.6; }
+.detail-ingredients { color: #555; line-height: 1.6; }
+.detail-price {
+  background: #f0f4f7; padding: 8px 15px;
+  border-radius: 8px; font-size: 0.92em;
+  color: #2E5A6E; margin-top: 10px;
+}
+.detail-price.price-up { background: #fde8e8; color: #C0392B; }
+.discontinued-info { color: #C0392B; }
+
+.detail-secret {
+  background: #fdf6e3;
+  border-left: 3px solid #d4a017;
+  padding: 12px 15px; margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92em; color: #5a4a2a;
+  line-height: 1.6;
+}
+.secret-label {
+  font-weight: 700; color: #8b6914;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-size: 0.85em; margin-bottom: 4px; display: block;
+}
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.78em; font-weight: 600; }
 .tag.female { background: #fce4ec; color: #c2185b; }
 .tag.male { background: #e3f2fd; color: #1565c0; }
 .tag.unisex { background: #f3e5f5; color: #7b1fa2; }
 
-.perfume-link {
-  display: inline-block;
-  margin-top: 8px;
-  color: #4A7C8E;
-  text-decoration: none;
-  font-size: 0.85em;
-  font-weight: 600;
-}
-
-.perfume-link:hover { color: #1B3A4B; text-decoration: underline; }
-
-/* Stats bar */
-.stats-bar {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px 0 30px;
-}
-
-.stat-item {
-  background: white;
-  padding: 15px 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  text-align: center;
-}
-
-.stat-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8em;
-  color: #1B3A4B;
-}
-
-.stat-label {
-  font-size: 0.82em;
-  color: #8BA5B0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Filter/sort controls */
-.controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  flex: 1;
-  min-width: 200px;
-  padding: 10px 15px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 0.95em;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.search-input:focus { border-color: #4A7C8E; }
-
-.sort-btn {
-  padding: 8px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.88em;
-  font-weight: 600;
-  color: #555;
-  transition: all 0.2s;
-}
-
-.sort-btn:hover, .sort-btn.active { border-color: #4A7C8E; color: #4A7C8E; background: #f0f6f8; }
-
-/* Index page specific */
 .cover {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-height: 60vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
   background: linear-gradient(135deg, #1B3A4B 0%, #4A7C8E 50%, #8BA5B0 100%);
-  color: white;
-  text-align: center;
-  padding: 60px 40px;
+  color: white; text-align: center; padding: 60px 40px;
 }
+.cover h1 { font-family: 'Playfair Display', serif; font-size: 3.2em; margin-bottom: 15px; letter-spacing: 2px; }
+.cover .subtitle { font-size: 1.2em; font-weight: 300; opacity: 0.9; max-width: 600px; }
 
-.cover h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.2em;
-  margin-bottom: 15px;
-  letter-spacing: 2px;
-}
-
-.cover .subtitle {
-  font-size: 1.2em;
-  font-weight: 300;
-  opacity: 0.9;
-  max-width: 600px;
-}
-
-.shelf-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  margin-top: 40px;
-}
-
+.shelf-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
 .shelf-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
+  background: white; border-radius: 16px; padding: 30px;
   box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-decoration: none;
-  color: inherit;
-  display: block;
+  text-align: center; transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none; color: inherit; display: block;
 }
-
 .shelf-card:hover { transform: translateY(-5px); box-shadow: 0 8px 35px rgba(0,0,0,0.12); }
-
 .shelf-card .icon { font-size: 2.5em; margin-bottom: 15px; }
-.shelf-card h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4em;
-  color: #1B3A4B;
-  margin-bottom: 8px;
-}
+.shelf-card h2 { font-family: 'Playfair Display', serif; font-size: 1.4em; color: #1B3A4B; margin-bottom: 8px; }
+.shelf-card .shelf-count { font-size: 2em; font-weight: 700; margin-bottom: 5px; }
+.shelf-card .shelf-desc { font-size: 0.9em; color: #888; line-height: 1.5; }
 
-.shelf-card .shelf-count {
-  font-size: 2em;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.shelf-card .shelf-desc {
-  font-size: 0.9em;
-  color: #888;
-  line-height: 1.5;
-}
-
-.footer {
-  text-align: center;
-  padding: 40px;
-  color: #aaa;
-  font-size: 0.85em;
-  border-top: 1px solid #eee;
-  margin-top: 60px;
-}
+.footer { text-align: center; padding: 40px; color: #aaa; font-size: 0.85em; border-top: 1px solid #eee; margin-top: 60px; }
 
 @media (max-width: 768px) {
   .cover h1 { font-size: 2em; }
   .page-header h1 { font-size: 2em; }
-  .perfume-grid { grid-template-columns: 1fr; }
   .nav-inner { gap: 4px; }
   .nav a { padding: 4px 10px; font-size: 0.82em; }
+  .card-header img { width: 50px; height: 50px; }
 }
 </style>
 </head>
@@ -325,41 +208,20 @@ body {
 <a href="try.html">🔮 спробувати (532)</a>
 </div></nav>
 
-
 <div class="page-header">
   <h1>💎 В мене є</h1>
   <div class="count"><span id="visibleCount">64</span> ароматів</div>
-  <div class="description">Особиста колекція — аромати, які Єліна обрала для свого гардеробу. Кожен флакон — це частина її ольфакторної ідентичності.</div>
+  <div class="description">Особиста колекція — аромати, які Єліна обрала для свого гардеробу</div>
 </div>
-
 <div class="container">
   <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-value">64</div>
-      <div class="stat-label">Ароматів</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">36</div>
-      <div class="stat-label">Брендів</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">1993–2025</div>
-      <div class="stat-label">Роки</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">0</div>
-      <div class="stat-label">Жіночих</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">64</div>
-      <div class="stat-label">Унісекс</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">0</div>
-      <div class="stat-label">Чоловічих</div>
-    </div>
+    <div class="stat-item"><div class="stat-value">64</div><div class="stat-label">Ароматів</div></div>
+    <div class="stat-item"><div class="stat-value">36</div><div class="stat-label">Брендів</div></div>
+    <div class="stat-item"><div class="stat-value">1993–2025</div><div class="stat-label">Роки</div></div>
+    <div class="stat-item"><div class="stat-value">0</div><div class="stat-label">Жіночих</div></div>
+    <div class="stat-item"><div class="stat-value">64</div><div class="stat-label">Унісекс</div></div>
+    <div class="stat-item"><div class="stat-value">0</div><div class="stat-label">Чоловічих</div></div>
   </div>
-
   <div class="controls">
     <input type="text" id="searchInput" class="search-input" placeholder="🔍 Пошук за назвою або брендом...">
     <button class="sort-btn active" data-sort="default">За замовч.</button>
@@ -367,824 +229,1404 @@ body {
     <button class="sort-btn" data-sort="brand">За брендом</button>
     <button class="sort-btn" data-sort="year">За роком</button>
   </div>
+  <div class="perfume-list">
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2013">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.18132.jpg" alt="Perfume Calligraphy Rose" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Perfume Calligraphy Rose</div>
+      <div class="perfume-brand">Aramis</div>
+      <div class="perfume-meta"><span>📅 2013</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Trudi Loren</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> ~2018 (Estée Lauder)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Частина ексклюзивної трилогії Aramis, створеної виключно для близькосхідного ринку. Кожне видання досліджувало окрему орієнтальну ноту: основна (2012), Rose (2013), Saffron (2014). Парфум для справжніх цінителів автентичної якості.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Шафран, оригано, жимолость → турецька троянда, мирра, стиракс, лаванда → ладан, лабданум, амбергріс, мускус. Турецька троянда — один з найдорожчих компонентів у світовій парфумерії.</div></div>
+<div class="detail-price price-up">💰 Оригінальна ~€45 → нині €100–150+ на вторинному ринку. Значне подорожчання через дисконтинуацію!</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Флакони прикрашені арабською каліграфією, створеною ліванським художником Тареком Атріссі — ім&#x27;я «Rose» написане арабською в&#x27;яззю прямо на склі. Колекція існувала лише для ринку Перської затоки й ніколи офіційно не продавалась в Європі.</div>
 
-  <div class="perfume-grid">
-    <div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.18132.jpg" alt="Perfume Calligraphy Rose" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Perfume Calligraphy Rose</div>
-    <div class="perfume-brand">Aramis</div>
-    <div class="perfume-meta">
-      <span>📅 2013</span>
-      <span class="tag unisex">Унісекс</span>
     </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/18132" target="_blank">Переглянути на Fragrantica →</a>
   </div>
 </div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.31383.jpg" alt="African Leather" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">African Leather</div>
-    <div class="perfume-brand">Memo Paris</div>
-    <div class="perfume-meta">
-      <span>📅 2015</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/31383" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.103893.jpg" alt="Existence" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Existence</div>
-    <div class="perfume-brand">Amouage</div>
-    <div class="perfume-meta">
-      <span>📅 2025</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/103893" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.78656.jpg" alt="Guidance" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Guidance</div>
-    <div class="perfume-brand">Amouage</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/78656" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.15295.jpg" alt="Interlude Woman" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Interlude Woman</div>
-    <div class="perfume-brand">Amouage</div>
-    <div class="perfume-meta">
-      <span>📅 2012</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/15295" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.80602.jpg" alt="Sparkling Soul" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Sparkling Soul</div>
-    <div class="perfume-brand">Antiqua Firenze</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/80602" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.76834.jpg" alt="Pink Me Up" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Pink Me Up</div>
-    <div class="perfume-brand">Atelier des Ors</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/76834" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.74610.jpg" alt="Riviera Sunrise" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Riviera Sunrise</div>
-    <div class="perfume-brand">Atelier des Ors</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/74610" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.16220.jpg" alt="Black Saffron" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Black Saffron</div>
-    <div class="perfume-brand">Byredo</div>
-    <div class="perfume-meta">
-      <span>📅 2012</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/16220" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.97879.jpg" alt="Mojave Ghost Absolu" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Mojave Ghost Absolu</div>
-    <div class="perfume-brand">Byredo</div>
-    <div class="perfume-meta">
-      <span>📅 2024</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/97879" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.69009.jpg" alt="Young Rose" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Young Rose</div>
-    <div class="perfume-brand">Byredo</div>
-    <div class="perfume-meta">
-      <span>📅 2021</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/69009" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.28682.jpg" alt="Allure Sensuelle Eau de Toilette" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Allure Sensuelle Eau de Toilette</div>
-    <div class="perfume-brand">Chanel</div>
-    <div class="perfume-meta">
-      <span>📅 2006</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/28682" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.3606.jpg" alt="Molecule 02" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Molecule 02</div>
-    <div class="perfume-brand">Escentric Molecules</div>
-    <div class="perfume-meta">
-      <span>📅 2008</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/3606" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.27570.jpg" alt="Bois d'Hiver" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Bois d'Hiver</div>
-    <div class="perfume-brand">Ex Nihilo</div>
-    <div class="perfume-meta">
-      <span>📅 2014</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/27570" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.63570.jpg" alt="Gold Immortals" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Gold Immortals</div>
-    <div class="perfume-brand">Ex Nihilo</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/63570" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.79178.jpg" alt="Vesper Glitz" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Vesper Glitz</div>
-    <div class="perfume-brand">Ex Nihilo</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/79178" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.52149.jpg" alt="Flowers Turn Purple" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Flowers Turn Purple</div>
-    <div class="perfume-brand">Floraïku</div>
-    <div class="perfume-meta">
-      <span>📅 2018</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/52149" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.91209.jpg" alt="Acne Studios" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Acne Studios</div>
-    <div class="perfume-brand">Frederic Malle</div>
-    <div class="perfume-meta">
-      <span>📅 2024</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/91209" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.1191.jpg" alt="Le Chevrefeuille" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Le Chevrefeuille</div>
-    <div class="perfume-brand">Goutal</div>
-    <div class="perfume-meta">
-      <span>📅 2002</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/1191" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.47445.jpg" alt="Rebrode" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Rebrode</div>
-    <div class="perfume-brand">Gritti</div>
-    <div class="perfume-meta">
-      <span>📅 2018</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/47445" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.10779.jpg" alt="Jour de Fete" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Jour de Fete</div>
-    <div class="perfume-brand">L'Artisan Parfumeur</div>
-    <div class="perfume-meta">
-      <span>📅 2004</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/10779" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.3302.jpg" alt="L'Eau d'Ambre" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">L'Eau d'Ambre</div>
-    <div class="perfume-brand">L'Artisan Parfumeur</div>
-    <div class="perfume-meta">
-      <span>📅 1993</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/3302" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.4680.jpg" alt="La Chasse aux Papillons Extreme" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">La Chasse aux Papillons Extreme</div>
-    <div class="perfume-brand">L'Artisan Parfumeur</div>
-    <div class="perfume-meta">
-      <span>📅 1999</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/4680" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.32558.jpg" alt="Fleur d'Oranger" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Fleur d'Oranger</div>
-    <div class="perfume-brand">La Sultane de Saba</div>
-    <div class="perfume-meta">
-      <span>📅 2015</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/32558" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.68640.jpg" alt="Kingkydise" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Kingkydise</div>
-    <div class="perfume-brand">Laurent Mazzone Parfums</div>
-    <div class="perfume-meta">
-      <span>📅 2021</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/68640" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.6337.jpg" alt="Jasmin 17" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Jasmin 17</div>
-    <div class="perfume-brand">Le Labo</div>
-    <div class="perfume-meta">
-      <span>📅 2006</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/6337" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.70189.jpg" alt="Blanche Bête" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Blanche Bête</div>
-    <div class="perfume-brand">Les Liquides Imaginaires</div>
-    <div class="perfume-meta">
-      <span>📅 2021</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/70189" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.26257.jpg" alt="Aura Eau de Toilette " loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Aura Eau de Toilette </div>
-    <div class="perfume-brand">Loewe</div>
-    <div class="perfume-meta">
-      <span>📅 2014</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/26257" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.46066.jpg" alt="Baccarat Rouge 540 Extrait de Parfum" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Baccarat Rouge 540 Extrait de Parfum</div>
-    <div class="perfume-brand">Maison Francis Kurkdjian</div>
-    <div class="perfume-meta">
-      <span>📅 2017</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/46066" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.103517.jpg" alt="Kurky" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Kurky</div>
-    <div class="perfume-brand">Maison Francis Kurkdjian</div>
-    <div class="perfume-meta">
-      <span>📅 2025</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/103517" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.30352.jpg" alt="Oud Satin Mood" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Oud Satin Mood</div>
-    <div class="perfume-brand">Maison Francis Kurkdjian</div>
-    <div class="perfume-meta">
-      <span>📅 2015</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/30352" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.48456.jpg" alt="Oud Silk Mood" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Oud Silk Mood</div>
-    <div class="perfume-brand">Maison Francis Kurkdjian</div>
-    <div class="perfume-meta">
-      <span>📅 2018</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/48456" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.65577.jpg" alt="I Want" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">I Want</div>
-    <div class="perfume-brand">Mark Buxton</div>
-    <div class="perfume-meta">
-      <span>📅 2021</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/65577" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.66043.jpg" alt="Radical Rose" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Radical Rose</div>
-    <div class="perfume-brand">Matiere Premiere</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/66043" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.28049.jpg" alt="French Leather" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">French Leather</div>
-    <div class="perfume-brand">Memo Paris</div>
-    <div class="perfume-meta">
-      <span>📅 2014</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/28049" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.21771.jpg" alt="Italian Leather" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Italian Leather</div>
-    <div class="perfume-brand">Memo Paris</div>
-    <div class="perfume-meta">
-      <span>📅 2013</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/21771" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.79533.jpg" alt="Ithaque" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Ithaque</div>
-    <div class="perfume-brand">Memo Paris</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/79533" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.90739.jpg" alt="Bubble Forever" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Bubble Forever</div>
-    <div class="perfume-brand">Montale</div>
-    <div class="perfume-meta">
-      <span>📅 2024</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/90739" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.52816.jpg" alt="Dolls" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Dolls</div>
-    <div class="perfume-brand">Moth and Rabbit Perfumes</div>
-    <div class="perfume-meta">
-      
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/52816" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.80465.jpg" alt="Wulong Cha X" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Wulong Cha X</div>
-    <div class="perfume-brand">Nishane</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/80465" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.4547.jpg" alt="Artemisia" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Artemisia</div>
-    <div class="perfume-brand">Penhaligon's</div>
-    <div class="perfume-meta">
-      <span>📅 2002</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/4547" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.42935.jpg" alt="Izia" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Izia</div>
-    <div class="perfume-brand">Sisley</div>
-    <div class="perfume-meta">
-      <span>📅 2017</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/42935" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.605.jpg" alt="Soir de Lune" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Soir de Lune</div>
-    <div class="perfume-brand">Sisley</div>
-    <div class="perfume-meta">
-      <span>📅 2006</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/605" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.18306.jpg" alt="Soleil de Jeddah" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Soleil de Jeddah</div>
-    <div class="perfume-brand">Stéphane Humbert Lucas 777</div>
-    <div class="perfume-meta">
-      <span>📅 2013</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/18306" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.37825.jpg" alt="Cypress Shade" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Cypress Shade</div>
-    <div class="perfume-brand">The House of Oud</div>
-    <div class="perfume-meta">
-      <span>📅 2016</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/37825" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.49441.jpg" alt="Live In Colors" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Live In Colors</div>
-    <div class="perfume-brand">The House of Oud</div>
-    <div class="perfume-meta">
-      <span>📅 2018</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/49441" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.74317.jpg" alt="Sacred Groove" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Sacred Groove</div>
-    <div class="perfume-brand">The House of Oud</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/74317" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.49442.jpg" alt="The Time" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">The Time</div>
-    <div class="perfume-brand">The House of Oud</div>
-    <div class="perfume-meta">
-      <span>📅 2018</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/49442" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.15913.jpg" alt="Café Rose" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Café Rose</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2012</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/15913" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.54381.jpg" alt="Lavender Extreme" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Lavender Extreme</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2019</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/54381" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.1822.jpg" alt="Noir de Noir" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Noir de Noir</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2007</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/1822" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.71538.jpg" alt="Rose D'Amalfi" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Rose D'Amalfi</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/71538" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.58781.jpg" alt="Rose Prick" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Rose Prick</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/58781" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.71539.jpg" alt="Rose de Chine" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Rose de Chine</div>
-    <div class="perfume-brand">Tom Ford</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/71539" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.73137.jpg" alt="Pure Jasmine" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Pure Jasmine</div>
-    <div class="perfume-brand">Trussardi</div>
-    <div class="perfume-meta">
-      <span>📅 2022</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/73137" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.69345.jpg" alt="Satin Musk" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Satin Musk</div>
-    <div class="perfume-brand">Valmont</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/69345" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.60687.jpg" alt="Sea Bliss" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Sea Bliss</div>
-    <div class="perfume-brand">Valmont</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/60687" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.60682.jpg" alt="Secret Bamboo" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Secret Bamboo</div>
-    <div class="perfume-brand">Valmont</div>
-    <div class="perfume-meta">
-      <span>📅 2020</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/60682" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.30928.jpg" alt="Dear Polly" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Dear Polly</div>
-    <div class="perfume-brand">Vilhelm Parfumerie</div>
-    <div class="perfume-meta">
-      <span>📅 2015</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/30928" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.38260.jpg" alt="Myths Woman" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Myths Woman</div>
-    <div class="perfume-brand">Amouage</div>
-    <div class="perfume-meta">
-      <span>📅 2016</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/38260" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.3865.jpg" alt="Philosykos Eau de Parfum" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Philosykos Eau de Parfum</div>
-    <div class="perfume-brand">Diptyque</div>
-    <div class="perfume-meta">
-      <span>📅 1996</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/3865" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.90860.jpg" alt="Photographer" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Photographer</div>
-    <div class="perfume-brand">Genyum</div>
-    <div class="perfume-meta">
-      <span>📅 2024</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/90860" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.83497.jpg" alt="Lentezza Carezza " loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Lentezza Carezza </div>
-    <div class="perfume-brand">Filippo Sorcinelli</div>
-    <div class="perfume-meta">
-      <span>📅 2023</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/83497" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
-<div class="perfume-card" style="border-left-color:#4A7C8E">
-  <img src="https://fimgs.net/mdimg/perfume/s.41266.jpg" alt="Devil Tender" loading="lazy" onerror="this.style.display='none'">
-  <div class="perfume-info">
-    <div class="perfume-name">Devil Tender</div>
-    <div class="perfume-brand">Ex Nihilo</div>
-    <div class="perfume-meta">
-      <span>📅 2016</span>
-      <span class="tag unisex">Унісекс</span>
-    </div>
-    <a class="perfume-link" href="https://www.fragrantica.ua/perfume/41266" target="_blank">Переглянути на Fragrantica →</a>
-  </div>
-</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2015">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.31383.jpg" alt="African Leather" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">African Leather</div>
+      <div class="perfume-brand">Memo Paris</div>
+      <div class="perfume-meta"><span>📅 2015</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Aliénor Massenet</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні, активне виробництво</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Народився з особистих спогадів Massenet про візит до заповідника слонів в Африці. Парфумер була вражена сирою красою дикої природи і втілила це у контрастному підході до шкіряних ароматів — з теплими прянощами та квітковістю.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Кардамон, герань, рожевий перець → пачулі, кориця, троянда → шкіра, уд, янтар. Кардамон додає екзотичну енергію, що змагається з дикою сутністю шкіри.</div></div>
+<div class="detail-price ">💰 Стабільна ціна ~€180–220 за 75 мл. Активне виробництво.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Четвертий аромат серії Cuirs Nomades, що досліджує шкіряні традиції різних континентів. Кардамон збирають вручну в Гватемалі, а герань вирощують у Єгипті — географічний кивок на те, що рослина вперше зросла дикою в Південній Африці.</div>
 
+    </div>
   </div>
 </div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2025">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.103893.jpg" alt="Existence" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Existence</div>
+      <div class="perfume-brand">Amouage</div>
+      <div class="perfume-meta"><span>📅 2025</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Quentin Bisch</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Перший випуск</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Частина нової Odyssey Collection. Концептуально присвячений спокою нескінченності — філософське твердження про вічність. Переосмислення класичної тріади Amouage (троянда, ладан, амбергріс) через сучасну лінзу свіжості.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Альдегіди, ландиш, троянда → ладан, лабданум → білий мускус, бензоїн, амбергріс. Ландиш надає ніжності, що контрастує з потужністю ладану.</div></div>
+<div class="detail-price ">💰 €365 за 100 мл. Преміальний люксовий сегмент Amouage.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Один з найновіших випусків Amouage (2025). Amouage був заснований у 1983 році на прохання Султана Кабуса бін Саїда як «Дар Королів» — парфуми створювались як подарунки для іноземних лідерів під час державних візитів!</div>
 
-<div class="footer">
-  Ароматний Світ Єліни — Детальний Аналіз Парфумерної Колекції<br>
-  Дані з <a href="https://www.fragrantica.ua/members/19059" style="color:#4A7C8E">Fragrantica.ua</a> · Створено 2026
+    </div>
+  </div>
 </div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.78656.jpg" alt="Guidance" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Guidance</div>
+      <div class="perfume-brand">Amouage</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Quentin Bisch</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Один з найбільш прославлених творів Amouage останніх років. Bisch знайшов ідеальний баланс між традицією та інновацією — класична архітектура дому, але з фруктовою відкритістю, яка робить аромат доступнішим.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Груша, ліщина, олібанум → османтус, троянда, шафран, жасмін Sambac → сандал, ваніль, акігалавуд, амбергріс. Груша у верхніх нотках дає свіжість, рідкісну для орієнтальних ароматів.</div></div>
+<div class="detail-price ">💰 ~$290–320 за 100 мл. Активне виробництво.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Швидко став бестселером після запуску. Amouage використовує ладан (Boswellia sacra) з провінції Дофар в Омані та скельну троянду з гір Хаджар — ці інгредієнти збираються місцевими жителями за тисячолітніми традиціями.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2012">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.15295.jpg" alt="Interlude Woman" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Interlude Woman</div>
+      <div class="perfume-brand">Amouage</div>
+      <div class="perfume-meta"><span>📅 2012</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Karine Vinchon Spehner</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Переформулювання 2013–2014</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Суперечливий статус</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Випущена як частина парної колекції (з Interlude Man). Шипр-квітковий аромат, створений під час експериментального періоду Amouage. Значне переформулювання 2013–2014 років зробило старші партії особливо цінними для колекціонерів.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Шипрово-квіткова композиція з дубовим мохом та характерною глибиною, типовою для класичних шипрів.</div></div>
+<div class="detail-price ">💰 Первісна ~$180–220. Вторинний ринок: $160–418+ залежно від партії. Старі формулювання значно дорожчі!</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Оригінальна формула 2012 року НЕ містила акорду ківі, який з&#x27;являється в пізніших партіях! Парфум має 26% концентрацію олій із 6-тижневим визріванням (3 тижні мацерації + 3 тижні дозрівання). Старі партії коштують утричі дорожче.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.80602.jpg" alt="Sparkling Soul" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Sparkling Soul</div>
+      <div class="perfume-brand">Antiqua Firenze</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Enzo Galardi</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Італійський дім з історичним корінням у флорентійській традиції парфумерії. Sparkling Soul втілює яскраву енергію та сяяння Тоскани — квіткова композиція, що випромінює світло.</div></div>
+<div class="detail-price ">💰 ~€80–150 за 50 мл. Нішевий люксовий сегмент.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Створена Enzo Galardi для Italian Niche Lab, що «відтворює багатовікову велич Флоренції». Містить агресивний овердоз імбиру, ялівцю та рожевого перцю — незвичне рішення для цитрусового колоню.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.76834.jpg" alt="Pink Me Up" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Pink Me Up</div>
+      <div class="perfume-brand">Atelier des Ors</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Marie Salamagne</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Salamagne описувала натхнення: «Я уявляла Pink Me Up як сучасне і інтригуюче творіння, побудоване навколо сяючої ожини та NaturePrint® шампанського.» Парфум святкує радість життя та легкість.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Бергамот, цвіт апельсина → чорниця, троянда, шампанське (!) → мускус, пачулі. Шампанське як парфумерний компонент — справжня рідкість, синтетичний акорд іскристості.</div></div>
+<div class="detail-price ">💰 ~$180–200 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Флакон оздоблений у стилі Art Deco з кристалічною гранкою, де промені сонця (фірмовий знак дому) тонко вибиті на склі. У формулі містяться справжні пластівці 24-каратного золота!</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.74610.jpg" alt="Riviera Sunrise" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Riviera Sunrise</div>
+      <div class="perfume-brand">Atelier des Ors</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Marie Salamagne</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Парфумерна інтерпретація золотого світла Середземномор&#x27;я. Salamagne: «Я хотіла виразити сонячну енергію Французької Рів&#x27;єри. Апельсин для мене символізує сонце та Середземномор&#x27;я.»</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Італійський мандарин, апельсин, лимон → туніський цвіт апельсина, базилік, інжирне листя → ямське ветивер, кедр, мускус. Інжирне листя додає зелену, м&#x27;ясисту якість.</div></div>
+<div class="detail-price ">💰 ~$180–200 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Дебютувала на ESXENCE 2022. Також містить 24-каратне золото у формулі. Marie Salamagne — одна з найпродуктивніших сучасних жінок-парфумерів, автор понад 80 ароматів.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2012">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.16220.jpg" alt="Black Saffron" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Black Saffron</div>
+      <div class="perfume-brand">Byredo</div>
+      <div class="perfume-meta"><span>📅 2012</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jérôme Epinette</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Black Saffron Absolu (2025)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Ben Gorham, засновник Byredo, виріс в Індії і мав глибокий зв&#x27;язок зі спеціями. Black Saffron — його гімн святій спеції шафрану, перший аромат Byredo, що напряму посилається на географічне місце та культурну спадщину.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Побудований навколо шафрану як центрального героя, з теплими пряними нотками Сходу. У 2025 році з&#x27;явилась концентрована версія Absolu.</div></div>
+<div class="detail-price ">💰 $270 за 100 мл. Стабільна ціна. Нова Absolu-версія ~$300+.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Засновник Byredo Бен Горхем — колишній професійний баскетболіст зростом 196 см, який грав у Європі, поки візові проблеми не зруйнували кар&#x27;єру. Потім працював на будівництві перед тим, як вступити до Стокгольмської школи мистецтв. Зустріч із парфумером П&#x27;єром Вульфом у 2004 змінила все.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2024">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.97879.jpg" alt="Mojave Ghost Absolu" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Mojave Ghost Absolu</div>
+      <div class="perfume-brand">Byredo</div>
+      <div class="perfume-meta"><span>📅 2024</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jérôme Epinette</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Absolu — 2024</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Під час поїздки через пустелю Мохаве, Gorham був захоплений квіткою-привидом (Ghost Flower), що виростає в суворих умовах пустелі — символ стійкості та краси в екстремальних умовах. У 2024 — концентрована версія Absolu.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Сапотилла, амбретта, магнолія, фіалка → сандал, амбергріс, кедр. Absolu — ще більш інтенсивна інтерпретація.</div></div>
+<div class="detail-price ">💰 Оригінал ~$240–260. Absolu ~$300+.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Текстурована кришка флакону натхненна Якісугі — японським мистецтвом обпалювання деревини, що символізує трансформацію та стійкість. Квітка-привид (Ghost Flower) пустелі Мохаве — реальна рослина, що виживає при +50°C без дощу місяцями.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2021">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.69009.jpg" alt="Young Rose" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Young Rose</div>
+      <div class="perfume-brand">Byredo</div>
+      <div class="perfume-meta"><span>📅 2021</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jérôme Epinette</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Сміливе переосмислення класичної троянди. На відміну від традиційних розових ароматів, Young Rose навмисно порушує правила. Спочатку був ексклюзивом K11 Musea в Гонконгу.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Сичуаньський перець (!), насіння амбрети → дамаська троянда → мускус, амброксан. Сичуаньський перець у контексті розового аромату — революційно!</div></div>
+<div class="detail-price ">💰 ~$240–260 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Спочатку був ексклюзивом для K11 Musea в Гонконзі. Відомо, що партії Byredo суттєво відрізняються за стійкістю — «F-партія» значно перевершує «CM-партію». Компанія заперечує це, але форуми документують різницю.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2006">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.28682.jpg" alt="Allure Sensuelle Eau de Toilette" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Allure Sensuelle Eau de Toilette</div>
+      <div class="perfume-brand">Chanel</div>
+      <div class="perfume-meta"><span>📅 2006</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jacques Polge</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Легша інтерпретація класичного Allure Sensuelle, створена для повсякденного використання. Зберігає сенсуальну суть оригіналу, але у більш летучому форматі.</div></div>
+<div class="detail-price ">💰 ~$100–130 за 100 мл. Стабільна ціна класичного Chanel.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Jacques Polge — легендарний парфумер Chanel, який очолював парфумерний підрозділ 35 років (1978–2013), створивши Égoïste, Coco Mademoiselle, Allure. Передав крісло своєму синові Олів&#x27;є — рідкісна парфумерна династія!</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2008">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.3606.jpg" alt="Molecule 02" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Molecule 02</div>
+      <div class="perfume-brand">Escentric Molecules</div>
+      <div class="perfume-meta"><span>📅 2008</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Geza Schoen</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Революційна філософія мінімалізму — 100% амброксан у спирті! Перший в історії парфумерії продукт, що повністю складається з однієї синтетичної молекули. Schoen хотів показати красу одиничної молекули без маскування.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">100% амброксан — синтетична молекула, хімічно ідентична амброксу з амбергрісу. Максимальна концентрація розчинення: 13.5%, саме стільки і використано.</div></div>
+<div class="detail-price ">💰 ~$180–220 за 100 мл. Стабільна ціна.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Амброксан було випадково відкрито у 1973 році, коли Джон Б. Холл і Джеймс М. Сандерс з IFF помітили чарівний фіалковий запах при промиванні скляного посуду сірчаною кислотою! Кислота трансформувала Isocyclemone E в нову молекулу.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2014">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.27570.jpg" alt="Bois d&#x27;Hiver" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Bois d&#x27;Hiver</div>
+      <div class="perfume-brand">Ex Nihilo</div>
+      <div class="perfume-meta"><span>📅 2014</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Michel Girard (Givaudan)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Ex Nihilo («з нічого» латиною) — бренд, заснований трьома космополітичними паризьянами. Bois d&#x27;Hiver символізує хвойні дерева в парку батьків одного з засновників. Один з перших ароматів дому.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Кардамон, рожевий перець → білий кедр, геліотроп, циклама → пачулі, сандал, мускус, кипарис. Циклама — нечасто використовуваний компонент, що надає ніжності.</div></div>
+<div class="detail-price ">💰 $215–310 за 50–100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Парфумер Мішель Жірар до цього створив 1 Million для Paco Rabanne! Бренд описує аромат як «залізний кулак у оксамитовій рукавичці». Ex Nihilo пропонує послугу Osmologue — апарат для напів-індивідуальної модифікації ароматів (від $400).</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.63570.jpg" alt="Gold Immortals" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Gold Immortals</div>
+      <div class="perfume-brand">Ex Nihilo</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jordi Fernández</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Extrait de Parfum (2023)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Святкує красу та безсмертність золота як метафори вічності. Назва посилає на давньогрецьку філософію безсмертних богів. У 2023 — більш концентрована Extrait версія.</div></div>
+<div class="detail-price ">💰 ~€250–300 за EDP. Extrait (2023) ~€350+.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> У 2023 з&#x27;явилась Extrait de Parfum версія — один із небагатьох ароматів Ex Nihilo з кількома концентраціями. Ex Nihilo заснований у 2013 трьома паризькими космополітами: Сільві Лоде, Олів&#x27;є Руайєром та Бенуа Вердьє.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.79178.jpg" alt="Vesper Glitz" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Vesper Glitz</div>
+      <div class="perfume-brand">Ex Nihilo</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Nadège Le Garlantezec</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Частина колекції «Forbidden». Le Garlantezec — лауреатка Міжнародної премії молодого парфумера. Vesper Glitz створено для захоплення безвідповідного духу неймовірної ночі.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Нероль, мандарин, рожевий перець → іланг-іланг, мімоза, жасмін → ваніль, тонка, мускус, кедр. Мімоза рідко зустрічається в сучасній парфумерії — медова, майже маслянка якість.</div></div>
+<div class="detail-price ">💰 ~€200–250 за 50 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Парфумер Надеж Ле Гарлантезек — лауреатка Prix International du Jeune Parfumeur Créateur. Наратив описує «втомлену, але щасливу парижанку, що повертається додому на світанку», але рецензенти кажуть, що пахне більше як «фея у пляшці».</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2018">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.52149.jpg" alt="Flowers Turn Purple" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Flowers Turn Purple</div>
+      <div class="perfume-brand">Floraïku</div>
+      <div class="perfume-meta"><span>📅 2018</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Колектив Floraïku</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Бренд побудований на філософії використання мінімум 50% натуральних компонентів. Назва — художня метафора перетворення та еволюції. Мінімалістична деревно-ароматична композиція.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Базилік → лаванда → амбервуд. Базилік як трав&#x27;яний компонент рідко зустрічається у квіткових ароматах — несподіваний поворот.</div></div>
+<div class="detail-price ">💰 ~€150–180 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Назва Floraïku = Flora (квіти) + Haiku (японська поезія). На задній стороні кожного флакону вигравіруване оригінальне хайку — «парфум, що можна носити як літературу». Бренд використовує ультракороткі формули (8–12 інгредієнтів) — японський мінімалізм.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2024">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.91209.jpg" alt="Acne Studios" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Acne Studios</div>
+      <div class="perfume-brand">Frederic Malle</div>
+      <div class="perfume-meta"><span>📅 2024</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Frederic Malle</strong> (Париж, з 2000). Революціонер: перший &#x27;видавець парфумів&#x27; — дає парфумерам повну свободу. Онук засновника Dior.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2024</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2002">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.1191.jpg" alt="Le Chevrefeuille" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Le Chevrefeuille</div>
+      <div class="perfume-brand">Goutal</div>
+      <div class="perfume-meta"><span>📅 2002</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Рік випуску:</span> 2002</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2018">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.47445.jpg" alt="Rebrode" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Rebrode</div>
+      <div class="perfume-brand">Gritti</div>
+      <div class="perfume-meta"><span>📅 2018</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Gritti</strong> (Венеція, з 2010). Названий на честь дожа Андреа Грітті. Ренесансна розкіш Венеції.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2018</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2004">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.10779.jpg" alt="Jour de Fete" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Jour de Fete</div>
+      <div class="perfume-brand">L&#x27;Artisan Parfumeur</div>
+      <div class="perfume-meta"><span>📅 2004</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>L&#x27;Artisan Parfumeur</strong> (Париж, з 1976). Один з піонерів нішевої парфумерії. Лапорт — також засновник L&#x27;Olfactorie та Le Jardin Retrouvé.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2004</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="1993">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.3302.jpg" alt="L&#x27;Eau d&#x27;Ambre" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">L&#x27;Eau d&#x27;Ambre</div>
+      <div class="perfume-brand">L&#x27;Artisan Parfumeur</div>
+      <div class="perfume-meta"><span>📅 1993</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Jean-François Laporte</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> 1993, нинішній час</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">L&#x27;Artisan Parfumeur заснований у 1976 році Жаном Лапортом, який спочатку виробляв бурштинові кульки. L&#x27;Eau d&#x27;Ambre — один із перших парфумів бренду, натхненний Арабськими ночами. Майже 50 років історії!</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Герань, пачулі, амбергріс → мускус, тонка-боб, ваніль. Тонка-боб південноамериканського походження — класика орієнтальних ароматів.</div></div>
+<div class="detail-price ">💰 ~€150–180 за 100 мл EDT. Історичне значення!</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> ПЕРШИЙ аромат L&#x27;Artisan Parfumeur! Бренд почав як виробник бурштинових кульок у 1976. L&#x27;Eau d&#x27;Ambre фактично створив шаблон для сучасних бурштинових ароматів у нішевій парфумерії — майже 50 років історії!</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="1999">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.4680.jpg" alt="La Chasse aux Papillons Extreme" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">La Chasse aux Papillons Extreme</div>
+      <div class="perfume-brand">L&#x27;Artisan Parfumeur</div>
+      <div class="perfume-meta"><span>📅 1999</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Anne Flipo</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Рідкісний, малодоступний</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Народився з дитячих спогадів про полювання за метеликами під цвітучими гілками. Сієста в тіні лимонних дерев, де метелики танцюють на сонці. Extreme — концентрована інтерпретація мрії.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Рожевий перець, цитруси, шафран, абрикос → липовий колір, жасмін → мед, іланг-іланг.</div></div>
+<div class="detail-price price-up">💰 Оригінальна ~€80–120 → нині €150–250 на вторинному ринку через рідкість.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Використовує справжній абсолю липового цвіту — надзвичайно рідкісний та дорогий інгредієнт, що робить цей аромат одним з найдорожчих у виробництві для дому. «Полювання на метеликів» — назва дитячої гри.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2015">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.32558.jpg" alt="Fleur d&#x27;Oranger" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Fleur d&#x27;Oranger</div>
+      <div class="perfume-brand">La Sultane de Saba</div>
+      <div class="perfume-meta"><span>📅 2015</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Невідомо</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Святкування туніської апельсинової пахощі. La Sultane de Saba відомі подорожніми колекціями, що розповідають історії маршрутів прянощів Сходу.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Бергамот, лимон, петигрейн → нероль, троянда → апельсинова пахощі. Туніська апельсинова пахощі у базі — одурманлива молекула.</div></div>
+<div class="detail-price ">💰 ~€70–90. Доступна нішева лінія.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Засновниця Ванесса Сітбон назвала бренд на честь Цариці Савської (біблійна фігура). Апельсинова пахощі в традиційних середземноморських культурах символізує чистоту та весільні церемонії — аромат як ритуальний оберіг.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2021">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.68640.jpg" alt="Kingkydise" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Kingkydise</div>
+      <div class="perfume-brand">Laurent Mazzone Parfums</div>
+      <div class="perfume-meta"><span>📅 2021</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Laurent Mazzone</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Ексклюзив для парфумного бутика Obsentum. Втілення «заборонених плодів» — справжній спокус у пляшці. Екзотична композиція про темпераментність та сенсуальність.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Личі, рожевий грейпфрут, сичуаньський перець → троянда, матча (!), ірис → білий мускус, сандал, амбра. Комбінація личі та матчі — ультрасучасне поєднання!</div></div>
+<div class="detail-price ">💰 ~€150–180 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Спеціально створений у липні 2021 як ексклюзив для парфумного бутика Obsentum — рідкісний приклад «store-exclusive» в нішевій парфумерії. Laurent Mazzone будував репутацію тихо 15 років, перш ніж запустив власний дім у 2016.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2006">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.6337.jpg" alt="Jasmin 17" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Jasmin 17</div>
+      <div class="perfume-brand">Le Labo</div>
+      <div class="perfume-meta"><span>📅 2006</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Maurice Roucel</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Число 17 — це кількість інгредієнтів у формулі! Мінімалістичний підхід Roucel для переосмислення жасмінового парфуму без старомодності. Простота та визначеність.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Апельсинова пахощі, жасмін, нероль → ваніль, мускус, пальмароза → амбра, лицея кубеба, сандал. Унікальний мускусно-ванільний шлейф.</div></div>
+<div class="detail-price ">💰 ~€200–230 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Створений Морісом Рюселем, відомим своєю фірмовою нотою Michelia longifolia. Незважаючи на назву «Жасмін», аромат лідирує цвітом апельсина та неролі — навмисне підривання очікувань. Прихований діамант у колекції Le Labo, затінений блокбастерами на кшталт Santal 33.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2021">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.70189.jpg" alt="Blanche Bête" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Blanche Bête</div>
+      <div class="perfume-brand">Les Liquides Imaginaires</div>
+      <div class="perfume-meta"><span>📅 2021</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Louise Turner</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Cannes LE (2025)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">«Біла звірина» — образ з середньовічних гобеленів, де біла чарівна тварина супроводжує молоду жінку в квітнику. Частина тетралогії La Bestiaire (Peau de Bête, Blanche Bête, Bête Humaine).</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Молоко (!), амбретта → жасмін, ладан → ваніль, мускус, тонка, какао. Молоко у верхніх нотках — рідкість, що контрастує з дикістю базових нот.</div></div>
+<div class="detail-price ">💰 ~€120–150.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Парфумер Луїза Тернер вивчала стоматологію, перш ніж перейти до парфумерії! Молочні ноти створені через амбретту/мускусну мальву — один з небагатьох люксових ароматів з автентичним кремовим відкриттям через натуральні матеріали, а не синтетичні акорди.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2014">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.26257.jpg" alt="Aura Eau de Toilette " loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Aura Eau de Toilette </div>
+      <div class="perfume-brand">Loewe</div>
+      <div class="perfume-meta"><span>📅 2014</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Loewe</strong> (Мадрид, з 1846). Найстаріший люксовий дім Іспанії. Під керівництвом Джонатана Андерсона.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2014</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2017">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.46066.jpg" alt="Baccarat Rouge 540 Extrait de Parfum" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Baccarat Rouge 540 Extrait de Parfum</div>
+      <div class="perfume-brand">Maison Francis Kurkdjian</div>
+      <div class="perfume-meta"><span>📅 2017</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Francis Kurkdjian</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Millésime 2024 ($28,000!)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Baccarat святкував 250-річчя, і Kurkdjian створив ексклюзив у кристальному флаконі з 24-каратним золотом. Число 540 — температура в °C, при якій кристал стає золотистим! Спочатку лише 250 флаконів по $4000. Це була революція.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Зелене яблуко, амброксан → жасмін самбак, троянда → амбра, ветивер, мускус. Побудований на концепції «трьох аур» — шарів світла та прозорості.</div></div>
+<div class="detail-price ">💰 EDP 70 мл ~$350–400. Extrait 24 мл ~$475. Millésime LE 2024: $28,000 (з кристальним флаконом!).</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Ультралімітована Édition Millésime — $28,000 за флакон, лише 54 штуки на рік — містить СПРАВЖНІЙ амбергріс! Звичайна версія використовує синтетичний амброксан. Підробки BR540 — 4-та за кількістю конфіскацій на митниці США (500,000+ фейків на $57 млн).</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2025">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.103517.jpg" alt="Kurky" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Kurky</div>
+      <div class="perfume-brand">Maison Francis Kurkdjian</div>
+      <div class="perfume-meta"><span>📅 2025</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Francis Kurkdjian</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Перший випуск</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Найновіший парфум від майстра. «Kurky» — домашнє прізвисько автора. Розповідь про дитинство та свободу. Квітково-фруктова композиція.</div></div>
+<div class="detail-price ">💰 ~€150–200. Новинка MFK.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> «Kurky» — дитяче ПРІЗВИСЬКО самого Френсіса Куркджяна! Аромат святкує його спогад про знаходження коробки з драже (мигдальними цукерками). Вперше MFK створює відверто автобіографічний аромат — з нотами попкорну та жувальних цукерок, що порушує його імідж «серйозного парфумера».</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2015">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.30352.jpg" alt="Oud Satin Mood" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Oud Satin Mood</div>
+      <div class="perfume-brand">Maison Francis Kurkdjian</div>
+      <div class="perfume-meta"><span>📅 2015</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Francis Kurkdjian</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Перший у серії «Oud Moods». Уд, прикритий сніжно-білим атласом ванілі та карамелі — дослідження чутливості удової деревини різними способами.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Болгарська троянда, фіалка, суниця → турецька троянда → уд (агарвуд), ваніль, амбра, бензоїн, карамель, кедр.</div></div>
+<div class="detail-price ">💰 ~€215–250 за 70 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Уд з Лаосу, добутий за принципами fair-trade — рідкість для 2015, коли «етичний уд» майже не існував. «Satin» — не про тканину, а про текстуру аромату: гладкий, кремовий, на відміну від гострого/сухого традиційного уду. Існують лімітовані версії з ручним гравіюванням за $1,250+.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2018">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.48456.jpg" alt="Oud Silk Mood" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Oud Silk Mood</div>
+      <div class="perfume-brand">Maison Francis Kurkdjian</div>
+      <div class="perfume-meta"><span>📅 2018</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Francis Kurkdjian</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">«Зеленіший брат» Satin Mood. Якщо Satin — про м&#x27;який романс, то Silk — про бурхливу пристрасть. Більше фокусу на самому уді та деревних нотах.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Болгарська троянда, ромашка, бергамот → деревина гваяка, гедіон → уд, папірус. Свіжіше та зеленіше за Satin.</div></div>
+<div class="detail-price ">💰 ~€200–230 за 70 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> «Silk» vs «Satin» — концепція різних «текстур» уду, запозичена з інтер&#x27;єрного дизайну: шовк = гладкий + сяючий; атлас = насичений + теплий. Уд з Лаосу + папірус — незвичне поєднання, адже папірус зазвичай зустрічається у свіжих ароматах, не в деревних.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2021">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.65577.jpg" alt="I Want" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">I Want</div>
+      <div class="perfume-brand">Mark Buxton</div>
+      <div class="perfume-meta"><span>📅 2021</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Mark Buxton</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Психологічний парфум про бажання. «Якщо ти хочеш — йди й візьми це!» Чистий девіз композиції, побудованої на інтенсивній ягідній енергії.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Чорна смородина, дикі ягоди → троянда, магнолія, ірис, жасмін, тубероза → пачулі, уд, ветивер. Рідкісна концентрація чорної смородини!</div></div>
+<div class="detail-price ">💰 ~€120–150 за 50 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Частина Freedom Collection, натхненна піснею Queen «I Want To Break Free». Mark Buxton також створив Dolls для Moth and Rabbit — рідкісний приклад парфумера, що працює одночасно для свого бренду та інді-бренду з кінематографічним натхненням.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.66043.jpg" alt="Radical Rose" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Radical Rose</div>
+      <div class="perfume-brand">Matiere Premiere</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Aurélien Guichard</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Extrait (2024)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Guichard — єдиний парфумер у світі, який володіє власною органічною (Ecocert) плантацією троянд Centifolia в Грасі! Radical Rose містить найвищу дозу розової абсолю з його власних полів. «Від землі до флакона» — без посередників.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Абсолю троянди Centifolia з власних полів + пачулі, шафран, лабданум, перець + абсолю безсмертника з Хорватії. Безсмертник додає відчуття кар&#x27;ю та чогось металічного.</div></div>
+<div class="detail-price ">💰 EDP ~€130–150. Extrait (2024) ~€180–200.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Moth and Rabbit заснований у Берліні в 2016 Елке Фільпес та Крістіаном Чоєм. Бренд перетворює кінонаративи на аромати — кожна композиція є «обонятельним кіно». Фільм Кітано «Ляльки» (2002) розповідає три історії безкінечної любові через 4 пори року.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2014">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.28049.jpg" alt="French Leather" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">French Leather</div>
+      <div class="perfume-brand">Memo Paris</div>
+      <div class="perfume-meta"><span>📅 2014</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> A. Massenet / A. Massenet / M. Julien</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі три)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Серія Cuirs Nomades від Memo Paris — подорож шкірою різних країн. Italian Leather (2013) — теплота й лоск. French Leather (2014) — сонячна шкіра. Ithaque (2023) — подорож на острів Одіссея з гомерівської Одіссеї, створена Marypierre Julien.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Ithaque: бергамот, гіркий апельсин, тріо перців (рожевий, сичуаньський, мадагаскарський!) → чорна та червона смородина, можжевельник, малина, жасмін → кедр, пачулі.</div></div>
+<div class="detail-price ">💰 ~€120–150 за 75 мл кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Серія Cuirs Nomades — антропологічне дослідження шкіри різних культур. Ithaque (2023) натхненний островом Одіссея з Гомерової «Одіссеї». Містить тріо перців: рожевий, сичуаньський та мадагаскарський — кожен з різного континенту.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2013">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.21771.jpg" alt="Italian Leather" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Italian Leather</div>
+      <div class="perfume-brand">Memo Paris</div>
+      <div class="perfume-meta"><span>📅 2013</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> A. Massenet / A. Massenet / M. Julien</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі три)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Серія Cuirs Nomades від Memo Paris — подорож шкірою різних країн. Italian Leather (2013) — теплота й лоск. French Leather (2014) — сонячна шкіра. Ithaque (2023) — подорож на острів Одіссея з гомерівської Одіссеї, створена Marypierre Julien.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Ithaque: бергамот, гіркий апельсин, тріо перців (рожевий, сичуаньський, мадагаскарський!) → чорна та червона смородина, можжевельник, малина, жасмін → кедр, пачулі.</div></div>
+<div class="detail-price ">💰 ~€120–150 за 75 мл кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Серія Cuirs Nomades — антропологічне дослідження шкіри різних культур. Ithaque (2023) натхненний островом Одіссея з Гомерової «Одіссеї». Містить тріо перців: рожевий, сичуаньський та мадагаскарський — кожен з різного континенту.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.79533.jpg" alt="Ithaque" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Ithaque</div>
+      <div class="perfume-brand">Memo Paris</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> A. Massenet / A. Massenet / M. Julien</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі три)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Серія Cuirs Nomades від Memo Paris — подорож шкірою різних країн. Italian Leather (2013) — теплота й лоск. French Leather (2014) — сонячна шкіра. Ithaque (2023) — подорож на острів Одіссея з гомерівської Одіссеї, створена Marypierre Julien.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Ithaque: бергамот, гіркий апельсин, тріо перців (рожевий, сичуаньський, мадагаскарський!) → чорна та червона смородина, можжевельник, малина, жасмін → кедр, пачулі.</div></div>
+<div class="detail-price ">💰 ~€120–150 за 75 мл кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Серія Cuirs Nomades — антропологічне дослідження шкіри різних культур. Ithaque (2023) натхненний островом Одіссея з Гомерової «Одіссеї». Містить тріо перців: рожевий, сичуаньський та мадагаскарський — кожен з різного континенту.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2024">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.90739.jpg" alt="Bubble Forever" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Bubble Forever</div>
+      <div class="perfume-brand">Montale</div>
+      <div class="perfume-meta"><span>📅 2024</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Pierre Montale</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">«Бульбашки назавжди» — святкування фруктів, квітів та солодості. Pierre Montale продовжує традицію насичених орієнтальних парфумів.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Лимон, нероль, грейпфрут, груша → апельсинова пахощі, жасмін, троянда, кориця → карамель, ваніль, мускус, амбра.</div></div>
+<div class="detail-price ">💰 ~€140–170 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Montale офіційно заперечує зміни формул, але користувачі документують: Full Incense змінився з насиченого/димного на яскравий/легкий. Більшість ароматів Montale використовують синтетичний уд замість справжнього агарвуду — різниця ціни в 100 разів.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="0">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.52816.jpg" alt="Dolls" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Dolls</div>
+      <div class="perfume-brand">Moth and Rabbit Perfumes</div>
+      <div class="perfume-meta"> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Mark Buxton</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Натхнення — фільм «Ляльки» (2002) японського режисера Такесі Кітано про три історії безкінечної любові. Композиція подорожує через 4 сезони: від весняного цвітіння вишні до зимового снігу.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Весна: вишневий цвіт, герань → Літо: кленовий сироп, іланг-іланг, троянда → Зима: сніг (синтетичний акорд!), мускус, амбергріс. Кленовий сироп як парфумерна нота — справжня рідкість!</div></div>
+<div class="detail-price ">💰 ~€100–130 за 50 мл.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.80465.jpg" alt="Wulong Cha X" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Wulong Cha X</div>
+      <div class="perfume-brand">Nishane</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Julien Rasquinet</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> X-версія 2023</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Оригінал 2015 — подорож до чайних садів Далекого Сходу. X-версія 2023 — пом&#x27;якшення гострих країв, додавання магнолії. Зелений чай замість улуну, тимуса замість мускатного горіха.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Бергамот, юзу, мандарин → зелений чай, магнолія, тимуса → мускус, смокиня.</div></div>
+<div class="detail-price ">💰 ~€130–160 за 100 мл.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Nishane заснований у 2012 Муратом Катраном (колишній менеджер з експорту сталі!) та Мертом Гюзелем. Жоден турецький нішевий парфумерний бренд не існував раніше, незважаючи на 3000-річну парфумерну спадщину Стамбулу. X-версія приглушує гострий цитрус оригіналу та додає магнолію.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2002">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.4547.jpg" alt="Artemisia" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Artemisia</div>
+      <div class="perfume-brand">Penhaligon&#x27;s</div>
+      <div class="perfume-meta"><span>📅 2002</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Невідомо</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Можливо (рідкісний)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Від легендарного дому Penhaligon&#x27;s (засн. 1870). Номінована на премію FiFi у категорії «Nouveau Niche» 2002 року. Британська витонченість з орієнтальним серцем.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Нектарин, зелені ноти → зелене яблуко, конвалія, жасмін, чай, фіалка, ваніль → дубовий мох, сандал, мускус.</div></div>
+<div class="detail-price ">💰 Раритет! На вторинному ринку €150–200+.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Названа на честь художниці XVII ст. Артемізії Джентілескі — першої жінки, прийнятої до Флорентійської Академії мистецтв! Перший Eau de Parfum від Penhaligon&#x27;s за 132 роки існування бренду (з 1870). Penhaligon&#x27;s має справжній Королівський Ордер 1903 року від Королеви Александри.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2017">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.42935.jpg" alt="Izia" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Izia</div>
+      <div class="perfume-brand">Sisley</div>
+      <div class="perfume-meta"><span>📅 2017</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> A. Clerc-Marie / Dominique Ropion</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Soir de Lune LE 2015</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (обидва)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Izia використовує унікальну троянду Ornano з саду Ізабелль д&#x27;Орнано — з лимонним запахом та нотами груші. Soir de Lune від Dominique Ropion — «вечір місяця»: свіжа, волюптуозна, темна одночасно.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Soir de Lune: коріандр, перець, мускатний горіх → травнева троянда, мімоза, ірис, жасмін → мед, дубовий мох, пачулі. Комбінація меду та дубового моху — сенсація!</div></div>
+<div class="detail-price ">💰 Izia ~€120–150. Soir de Lune ~€130–160.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> «Izia» — польський зменшувальний від Isabelle, на честь засновниці дому Ізабелль д&#x27;Орнано. Містить рідкісну троянду Ornano з її особистого саду — цвіте лише раз на рік! Флакон створив польський скульптор Броніслав Кшиштоф. Soir de Lune від легендарного Dominique Ropion має 12 нотних сімейств.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2006">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.605.jpg" alt="Soir de Lune" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Soir de Lune</div>
+      <div class="perfume-brand">Sisley</div>
+      <div class="perfume-meta"><span>📅 2006</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> A. Clerc-Marie / Dominique Ropion</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Soir de Lune LE 2015</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (обидва)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Izia використовує унікальну троянду Ornano з саду Ізабелль д&#x27;Орнано — з лимонним запахом та нотами груші. Soir de Lune від Dominique Ropion — «вечір місяця»: свіжа, волюптуозна, темна одночасно.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Soir de Lune: коріандр, перець, мускатний горіх → травнева троянда, мімоза, ірис, жасмін → мед, дубовий мох, пачулі. Комбінація меду та дубового моху — сенсація!</div></div>
+<div class="detail-price ">💰 Izia ~€120–150. Soir de Lune ~€130–160.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> «Izia» — польський зменшувальний від Isabelle, на честь засновниці дому Ізабелль д&#x27;Орнано. Містить рідкісну троянду Ornano з її особистого саду — цвіте лише раз на рік! Флакон створив польський скульптор Броніслав Кшиштоф. Soir de Lune від легендарного Dominique Ropion має 12 нотних сімейств.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2013">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.18306.jpg" alt="Soleil de Jeddah" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Soleil de Jeddah</div>
+      <div class="perfume-brand">Stéphane Humbert Lucas 777</div>
+      <div class="perfume-meta"><span>📅 2013</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Stéphane Humbert Lucas</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Mango Kiss, Afterglow (2022)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Lucas — не лише парфумер, а й художник-тамперист. Має синестезію — кожний колір викликає нюх! Парфум народився з трьох років подорожей до Саудівської Аравії. Золотисте сонце Джедди як драгоцінність.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Російська шкіра (домінуюча нота!), флорентійський ірис, амбра, ваніль. Пудрові facets ірису додають благородства.</div></div>
+<div class="detail-price ">💰 ~€100–120. Культовий статус.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Lucas має синестезію — він БАЧИТЬ кольори, коли нюхає! Число 777 — його особисте духовне число, що символізує духовність, захист та удачу. Парфум Pure Parfum з виключною 24% концентрацією — насиченіший за типовий EDP. Колекція Isra &amp; Miraj посилається на нічну подорож Пророка Мухаммада.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2016">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.37825.jpg" alt="Cypress Shade" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Cypress Shade</div>
+      <div class="perfume-brand">The House of Oud</div>
+      <div class="perfume-meta"><span>📅 2016</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Різні (Mauricio Cerizza, Cristian Calabro)</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Кожна пляшка розписується вручну італійським майстром — кожен флакон унікальний! Sacred Groove — колаборація з художницею Domitilla Biondi, яка ріже папір скальпелем. The Time — медитація про священний ритуал чаю (подорож від зеленого до чорного чаю).</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">The Time: бергамот, ромашка, полин → улун, чорний чай → кедр, амбра. Sacred Groove: ангеліка → лаванда, ірис, троянда → мускус, пачулі, ваніль.</div></div>
+<div class="detail-price ">💰 ~€90–130 кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Кожен яйцеподібний флакон розписується вручну італійським майстром-ремісником — жоден не повторюється! Sacred Groove — колаборація з художницею Домітіллою Біонді, яка ріже папір скальпелем для створення текстур.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2018">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.49441.jpg" alt="Live In Colors" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Live In Colors</div>
+      <div class="perfume-brand">The House of Oud</div>
+      <div class="perfume-meta"><span>📅 2018</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Різні (Mauricio Cerizza, Cristian Calabro)</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Кожна пляшка розписується вручну італійським майстром — кожен флакон унікальний! Sacred Groove — колаборація з художницею Domitilla Biondi, яка ріже папір скальпелем. The Time — медитація про священний ритуал чаю (подорож від зеленого до чорного чаю).</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">The Time: бергамот, ромашка, полин → улун, чорний чай → кедр, амбра. Sacred Groove: ангеліка → лаванда, ірис, троянда → мускус, пачулі, ваніль.</div></div>
+<div class="detail-price ">💰 ~€90–130 кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Кожен яйцеподібний флакон розписується вручну італійським майстром-ремісником — жоден не повторюється! Sacred Groove — колаборація з художницею Домітіллою Біонді, яка ріже папір скальпелем для створення текстур.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.74317.jpg" alt="Sacred Groove" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Sacred Groove</div>
+      <div class="perfume-brand">The House of Oud</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Різні (Mauricio Cerizza, Cristian Calabro)</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Кожна пляшка розписується вручну італійським майстром — кожен флакон унікальний! Sacred Groove — колаборація з художницею Domitilla Biondi, яка ріже папір скальпелем. The Time — медитація про священний ритуал чаю (подорож від зеленого до чорного чаю).</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">The Time: бергамот, ромашка, полин → улун, чорний чай → кедр, амбра. Sacred Groove: ангеліка → лаванда, ірис, троянда → мускус, пачулі, ваніль.</div></div>
+<div class="detail-price ">💰 ~€90–130 кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Кожен яйцеподібний флакон розписується вручну італійським майстром-ремісником — жоден не повторюється! Sacred Groove — колаборація з художницею Домітіллою Біонді, яка ріже папір скальпелем для створення текстур.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2018">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.49442.jpg" alt="The Time" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">The Time</div>
+      <div class="perfume-brand">The House of Oud</div>
+      <div class="perfume-meta"><span>📅 2018</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Різні (Mauricio Cerizza, Cristian Calabro)</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Кожна пляшка розписується вручну італійським майстром — кожен флакон унікальний! Sacred Groove — колаборація з художницею Domitilla Biondi, яка ріже папір скальпелем. The Time — медитація про священний ритуал чаю (подорож від зеленого до чорного чаю).</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">The Time: бергамот, ромашка, полин → улун, чорний чай → кедр, амбра. Sacred Groove: ангеліка → лаванда, ірис, троянда → мускус, пачулі, ваніль.</div></div>
+<div class="detail-price ">💰 ~€90–130 кожен.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Кожен яйцеподібний флакон розписується вручну італійським майстром-ремісником — жоден не повторюється! Sacred Groove — колаборація з художницею Домітіллою Біонді, яка ріже папір скальпелем для створення текстур.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2012">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.15913.jpg" alt="Café Rose" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Café Rose</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2012</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Tom Ford Team / Olivier Gillotin</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Café Rose: Signature 2023</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Оригінал Café Rose — так. Lavender E. — так!</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Café Rose 2012 з Private Blend набула культового статусу. У 2023 — нова Signature версія (менш мускусна). Lavender Extreme — «irreverently new» підхід до лаванди, де вона звучить на максимальній гучності.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Lavender E.: фіалка, лимон → лаванда, кориця, герань, троянда → тонка, кумарин. Комбінація лаванди з корицею — електрична вишуканість.</div></div>
+<div class="detail-price price-up">💰 Café Rose 2012: ~$250 → вторинний ринок $350–500+! Lavender Extreme: $320 → нині $375–408. Обидва значно подорожчали!</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Café Rose 2012 Private Blend vs 2023 Signature — РІЗНІ формули! Signature посилює троянду, зменшуючи каву до ролі фону. Lavender Extreme — Private Blend з заявленою 12-годинною стійкістю. Обидва зняті/переформульовані після поглинання Tom Ford корпорацією Estée Lauder.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2019">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.54381.jpg" alt="Lavender Extreme" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Lavender Extreme</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2019</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Tom Ford Team / Olivier Gillotin</div>
+<div class="detail-row"><span class="detail-label">Перевипуск:</span> Café Rose: Signature 2023</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Оригінал Café Rose — так. Lavender E. — так!</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Café Rose 2012 з Private Blend набула культового статусу. У 2023 — нова Signature версія (менш мускусна). Lavender Extreme — «irreverently new» підхід до лаванди, де вона звучить на максимальній гучності.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Lavender E.: фіалка, лимон → лаванда, кориця, герань, троянда → тонка, кумарин. Комбінація лаванди з корицею — електрична вишуканість.</div></div>
+<div class="detail-price price-up">💰 Café Rose 2012: ~$250 → вторинний ринок $350–500+! Lavender Extreme: $320 → нині $375–408. Обидва значно подорожчали!</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Café Rose 2012 Private Blend vs 2023 Signature — РІЗНІ формули! Signature посилює троянду, зменшуючи каву до ролі фону. Lavender Extreme — Private Blend з заявленою 12-годинною стійкістю. Обидва зняті/переформульовані після поглинання Tom Ford корпорацією Estée Lauder.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2007">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.1822.jpg" alt="Noir de Noir" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Noir de Noir</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2007</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Cavallier-Belletrud, Frémont, Crespo / Team / Flavigny / Team</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі активні)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Noir de Noir (2007) — «Чорна королева» Tom Ford: чорна троянда з трюфелем (!). Rose Prick (2020) — провокація: «prick» = шипи троянди + дотепність. Натхненням став власний розарій Tom Ford. Rose D&#x27;Amalfi — побережжя Амальфі.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Noir de Noir: шафран → чорна троянда, трюфель → пачулі, шкіра, уд, дубовий мох. Rose Prick: сичуаньський перець, куркума → три сорти троянди → пачулі, тонка.</div></div>
+<div class="detail-price ">💰 ~$250–300 за 50 мл кожен. Noir de Noir — стабільна класика.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Noir de Noir (2007) — один з ПЕРШИХ 12 ароматів Private Blend, містить рідкісний акорд трюфеля в серці! Rose Prick — провокаційна назва: «prick» = і шипи, і дотепний натяк. Rose de Chine ЗНЯТО З ВИРОБНИЦТВА (2024) — уже подорожчала на вторинному ринку.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.71538.jpg" alt="Rose D&#x27;Amalfi" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Rose D&#x27;Amalfi</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Cavallier-Belletrud, Frémont, Crespo / Team / Flavigny / Team</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі активні)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Noir de Noir (2007) — «Чорна королева» Tom Ford: чорна троянда з трюфелем (!). Rose Prick (2020) — провокація: «prick» = шипи троянди + дотепність. Натхненням став власний розарій Tom Ford. Rose D&#x27;Amalfi — побережжя Амальфі.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Noir de Noir: шафран → чорна троянда, трюфель → пачулі, шкіра, уд, дубовий мох. Rose Prick: сичуаньський перець, куркума → три сорти троянди → пачулі, тонка.</div></div>
+<div class="detail-price ">💰 ~$250–300 за 50 мл кожен. Noir de Noir — стабільна класика.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Noir de Noir (2007) — один з ПЕРШИХ 12 ароматів Private Blend, містить рідкісний акорд трюфеля в серці! Rose Prick — провокаційна назва: «prick» = і шипи, і дотепний натяк. Rose de Chine ЗНЯТО З ВИРОБНИЦТВА (2024) — уже подорожчала на вторинному ринку.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.58781.jpg" alt="Rose Prick" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Rose Prick</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Cavallier-Belletrud, Frémont, Crespo / Team / Flavigny / Team</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі активні)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Noir de Noir (2007) — «Чорна королева» Tom Ford: чорна троянда з трюфелем (!). Rose Prick (2020) — провокація: «prick» = шипи троянди + дотепність. Натхненням став власний розарій Tom Ford. Rose D&#x27;Amalfi — побережжя Амальфі.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Noir de Noir: шафран → чорна троянда, трюфель → пачулі, шкіра, уд, дубовий мох. Rose Prick: сичуаньський перець, куркума → три сорти троянди → пачулі, тонка.</div></div>
+<div class="detail-price ">💰 ~$250–300 за 50 мл кожен. Noir de Noir — стабільна класика.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Noir de Noir (2007) — один з ПЕРШИХ 12 ароматів Private Blend, містить рідкісний акорд трюфеля в серці! Rose Prick — провокаційна назва: «prick» = і шипи, і дотепний натяк. Rose de Chine ЗНЯТО З ВИРОБНИЦТВА (2024) — уже подорожчала на вторинному ринку.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.71539.jpg" alt="Rose de Chine" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Rose de Chine</div>
+      <div class="perfume-brand">Tom Ford</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Cavallier-Belletrud, Frémont, Crespo / Team / Flavigny / Team</div>
+<div class="detail-row discontinued-info"><span class="detail-label">Статус:</span> Ні (всі активні)</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">Noir de Noir (2007) — «Чорна королева» Tom Ford: чорна троянда з трюфелем (!). Rose Prick (2020) — провокація: «prick» = шипи троянди + дотепність. Натхненням став власний розарій Tom Ford. Rose D&#x27;Amalfi — побережжя Амальфі.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Noir de Noir: шафран → чорна троянда, трюфель → пачулі, шкіра, уд, дубовий мох. Rose Prick: сичуаньський перець, куркума → три сорти троянди → пачулі, тонка.</div></div>
+<div class="detail-price ">💰 ~$250–300 за 50 мл кожен. Noir de Noir — стабільна класика.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Noir de Noir (2007) — один з ПЕРШИХ 12 ароматів Private Blend, містить рідкісний акорд трюфеля в серці! Rose Prick — провокаційна назва: «prick» = і шипи, і дотепний натяк. Rose de Chine ЗНЯТО З ВИРОБНИЦТВА (2024) — уже подорожчала на вторинному ринку.</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2022">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.73137.jpg" alt="Pure Jasmine" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Pure Jasmine</div>
+      <div class="perfume-brand">Trussardi</div>
+      <div class="perfume-meta"><span>📅 2022</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Рік випуску:</span> 2022</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.69345.jpg" alt="Satin Musk" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Satin Musk</div>
+      <div class="perfume-brand">Valmont</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Valmont</strong> (Женева, з 1985). Швейцарський люксовий бренд, відомий косметикою. Парфуми — натуральне розширення.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2020</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.60687.jpg" alt="Sea Bliss" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Sea Bliss</div>
+      <div class="perfume-brand">Valmont</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Valmont</strong> (Женева, з 1985). Швейцарський люксовий бренд, відомий косметикою. Парфуми — натуральне розширення.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2020</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2020">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.60682.jpg" alt="Secret Bamboo" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Secret Bamboo</div>
+      <div class="perfume-brand">Valmont</div>
+      <div class="perfume-meta"><span>📅 2020</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Valmont</strong> (Женева, з 1985). Швейцарський люксовий бренд, відомий косметикою. Парфуми — натуральне розширення.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2020</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2015">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.30928.jpg" alt="Dear Polly" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Dear Polly</div>
+      <div class="perfume-brand">Vilhelm Parfumerie</div>
+      <div class="perfume-meta"><span>📅 2015</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Vilhelm Parfumerie</strong> (Нью-Йорк, з 2015). Натхненний кінематографом та літературою. Dear Polly — данина героїні роману.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2015</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2016">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.38260.jpg" alt="Myths Woman" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Myths Woman</div>
+      <div class="perfume-brand">Amouage</div>
+      <div class="perfume-meta"><span>📅 2016</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Amouage</strong> (Маскат, Оман, з 1983). Заснований за наказом Султана Кабуса бін Саїда. Використовує срібні флакони ручної роботи та найдорожчий ладан з Дофару.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2016</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="1996">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.3865.jpg" alt="Philosykos Eau de Parfum" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Philosykos Eau de Parfum</div>
+      <div class="perfume-brand">Diptyque</div>
+      <div class="perfume-meta"><span>📅 1996</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Diptyque</strong> (Париж, з 1961). Почали як декоративний магазин, парфуми з&#x27;явились у 1968. Культові овальні етикетки.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 1996</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2024">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.90860.jpg" alt="Photographer" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Photographer</div>
+      <div class="perfume-brand">Genyum</div>
+      <div class="perfume-meta"><span>📅 2024</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Genyum</strong> (Барселона, з 2022). Кожен аромат — професія. Photographer, Architect, Musician.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2024</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2023">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.83497.jpg" alt="Lentezza Carezza " loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Lentezza Carezza </div>
+      <div class="perfume-brand">Filippo Sorcinelli</div>
+      <div class="perfume-meta"><span>📅 2023</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-section"><div class="detail-subtitle">Про бренд</div><div class="detail-story"><strong>Filippo Sorcinelli</strong> (Пезаро, Італія, з 2016). Був органістом та дизайнером літургійного одягу для Ватикану! Парфуми натхненні церковними ритуалами.</div></div>
+<div class="detail-row"><span class="detail-label">Рік випуску:</span> 2023</div>
+<div class="detail-row"><span class="detail-label">Тип:</span> унісекс</div>
+
+    </div>
+  </div>
+</div>
+<div class="perfume-card" style="border-left-color:#4A7C8E" data-year="2016">
+  <div class="card-header">
+    <img src="https://fimgs.net/mdimg/perfume/270x270.41266.jpg" alt="Devil Tender" loading="lazy" onerror="this.style.display='none'">
+    <div class="card-header-info">
+      <div class="perfume-name">Devil Tender</div>
+      <div class="perfume-brand">Ex Nihilo</div>
+      <div class="perfume-meta"><span>📅 2016</span> <span class="tag unisex">Уні</span></div>
+    </div>
+    <div class="expand-icon">▼</div>
+  </div>
+  <div class="card-detail">
+    <div class="card-detail-inner">
+      <div class="detail-row"><span class="detail-label">Парфумер:</span> Nadège Le Garlantezec</div>
+<div class="detail-section"><div class="detail-subtitle">Історія</div><div class="detail-story">З колекції Les Interdites (Заборонені). Святкує контраст — диявольський спокус та ніжність одночасно. Поєднання рози із замшею та гостротою перцю.</div></div>
+<div class="detail-section"><div class="detail-subtitle">Інгредієнти</div><div class="detail-ingredients">Рожевий перець, персик, грейпфрут → троянда, пелюстки, чай → замша, геліотроп, сандал, ваніль.</div></div>
+<div class="detail-price ">💰 ~€100–130. Активне виробництво.</div>
+<div class="detail-secret"><span class="secret-label">🔎 МАЛОВІДОМИЙ ФАКТ</span> Частина колекції Les Interdites (Заборонені). Філософія Ex Nihilo — повна творча свобода для парфумерів, дизайнерів та склодувів, «розгортання ідей без обмежень». Le Garlantezec шукала дуальність — невинність і небезпеку в одному флаконі.</div>
+
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+<div class="footer">Ароматний Світ Єліни · Дані з Fragrantica.ua · 2026</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('searchInput');
-  const cards = document.querySelectorAll('.perfume-card');
-  const grid = document.querySelector('.perfume-grid');
-  const countEl = document.getElementById('visibleCount');
-
-  searchInput.addEventListener('input', function() {
-    const q = this.value.toLowerCase();
-    let visible = 0;
-    cards.forEach(card => {
-      const name = card.querySelector('.perfume-name').textContent.toLowerCase();
-      const brand = card.querySelector('.perfume-brand').textContent.toLowerCase();
-      const show = name.includes(q) || brand.includes(q);
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+  // Expandable cards
+  document.querySelectorAll('.card-header').forEach(header => {
+    header.addEventListener('click', function() {
+      const card = this.closest('.perfume-card');
+      card.classList.toggle('open');
     });
-    countEl.textContent = visible;
   });
 
+  // Search
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    const cards = document.querySelectorAll('.perfume-card');
+    const countEl = document.getElementById('visibleCount');
+    searchInput.addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const name = card.querySelector('.perfume-name').textContent.toLowerCase();
+        const brand = card.querySelector('.perfume-brand').textContent.toLowerCase();
+        const show = name.includes(q) || brand.includes(q);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (countEl) countEl.textContent = visible;
+    });
+  }
+
+  // Sort
   document.querySelectorAll('.sort-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       const sortBy = this.dataset.sort;
-      const cardsArr = Array.from(cards);
-      cardsArr.sort((a, b) => {
-        if (sortBy === 'name') {
-          return a.querySelector('.perfume-name').textContent.localeCompare(b.querySelector('.perfume-name').textContent, 'uk');
-        } else if (sortBy === 'brand') {
-          return a.querySelector('.perfume-brand').textContent.localeCompare(b.querySelector('.perfume-brand').textContent, 'uk');
-        } else if (sortBy === 'year') {
-          const yA = parseInt(a.querySelector('.perfume-meta')?.textContent?.match(/\d{4}/)?.[0] || '0');
-          const yB = parseInt(b.querySelector('.perfume-meta')?.textContent?.match(/\d{4}/)?.[0] || '0');
+      const container = document.querySelector('.perfume-list');
+      const cards = Array.from(container.querySelectorAll('.perfume-card'));
+      cards.sort((a, b) => {
+        if (sortBy === 'name') return a.querySelector('.perfume-name').textContent.localeCompare(b.querySelector('.perfume-name').textContent, 'uk');
+        if (sortBy === 'brand') return a.querySelector('.perfume-brand').textContent.localeCompare(b.querySelector('.perfume-brand').textContent, 'uk');
+        if (sortBy === 'year') {
+          const yA = parseInt(a.dataset.year || '0');
+          const yB = parseInt(b.dataset.year || '0');
           return yB - yA;
         }
         return 0;
       });
-      cardsArr.forEach(c => grid.appendChild(c));
+      cards.forEach(c => container.appendChild(c));
     });
   });
 });
